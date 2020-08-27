@@ -25,7 +25,16 @@ Wend
 If Window("Ejecutivo de interacción").InsightObject("InsightObject_24").Exist = true Then
 	Window("Ejecutivo de interacción").CaptureBitmap RutaEvidencias() & "ErrorServicio.png", True
 	imagenToWord "Error al Consultar Servicio Web", RutaEvidencias() & "ErrorServicio.png"
-	ExitActionIteration
+	wait 1
+	Window("Ejecutivo de interacción").InsightObject("InsightObject_26").Click
+While JavaWindow("Ejecutivo de interacción").JavaDialog("Autenticación del Cliente").JavaDialog("Error Message").Exist= False
+	wait 1
+Wend
+JavaWindow("Ejecutivo de interacción").JavaDialog("Autenticación del Cliente").JavaDialog("Error Message").JavaButton("Cancelar").Click
+DataTable("s_Resultado","RecoAPC") ="Fallido"
+DataTable("s_Detalle","RecoAPC") ="Error al consultar servicio web"
+Reporter.ReportEvent micFail, DataTable("s_Resultado","RecoAPC"), DataTable("s_Detalle","RecoAPC")
+ExitTestIteration
 End If
 Window("Ejecutivo de interacción").CaptureBitmap RutaEvidencias() & "ScoreCalculado.png", True
 imagenToWord "Score Calculado", RutaEvidencias() & "ScoreCalculado.png"

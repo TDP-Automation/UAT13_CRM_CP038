@@ -209,7 +209,8 @@ End Sub
 Sub FlujoWIC()
 
 	If DataTable("e_WIC_ValidaCli", dtLocalsheet)="SI" Then
-		RunAction "WIC1", oneIteration
+		
+RunAction "WIC", oneIteration
 	End If
 
 	
@@ -360,8 +361,8 @@ Sub ResumenOrden()
 	wait 2
 	
 '   If DataTable("e_WIC_ContrCli", dtLocalSheet) = "SI" Then
-'				RunAction "WIC2", oneIteration
 '
+'RunAction "WIC2", oneIteration
 '		Else 
 				
 				While JavaWindow("Ejecutivo de interacción").JavaDialog("Resumen de la orden (Orden").Exist = False
